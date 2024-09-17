@@ -1,0 +1,94 @@
+.toast {
+  background-color: var(--ifm-background-surface-color);
+
+  border: 0.1rem solid var(--ifm-color-primary);
+  border-radius: 0.5rem;
+
+  padding: 0.5rem 1rem;
+
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  block-size: max(100dvh, 26rem);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  inline-size: min(95%, 20rem);
+}
+
+.logo {
+  block-size: 8rem;
+  inline-size: 8rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  inline-size: 100%;
+
+  background-color: var(--ifm-background-surface-color);
+
+  border: 0.1rem solid var(--ifm-color-primary);
+  border-radius: 0.5rem;
+
+  padding: 0.5rem 1rem;
+}
+
+.title {
+  margin: 0;
+
+  font-weight: bold;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  inline-size: 100%;
+}
+
+.form input {
+  background-color: var(--ifm-background-surface-color);
+
+  border: 0.1rem solid var(--ifm-color-primary);
+  border-radius: 0.3rem;
+
+  padding: 0.5rem 1rem;
+}
+
+.submit {
+  inline-size: 100%;
+
+  padding: 0.5rem 1rem;
+  margin-block: 0.6rem;
+
+  outline: none;
+  border-radius: 0.3rem;
+  border: none;
+
+  background-color: var(--ifm-color-primary);
+
+  color: var(--ifm-color-emphasis-0);
+  font-size: 1rem;
+  font-weight: bold;
+
+  transition: 1s;
+
+  cursor: pointer;
+}
