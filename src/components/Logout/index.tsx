@@ -1,8 +1,9 @@
+import React from "react";
 import { useHistory } from "react-router-dom";
-import config from "./../../../../docusaurus.config";
+import config from "../../../docusaurus.config";
 import styles from "./styles.module.css";
 
-const Logout = (): JSX.Element => {
+const Logout: React.FC = () => {
   const history = useHistory();
 
   const handleClick = () => {

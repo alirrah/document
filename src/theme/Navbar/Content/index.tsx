@@ -10,7 +10,7 @@ import SearchBar from "@theme/SearchBar";
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
 import NavbarLogo from "@theme/Navbar/Logo";
 import NavbarSearch from "@theme/Navbar/Search";
-import Logout from "./../Logout";
+import Logout from "./../../../components/Logout";
 
 import styles from "./styles.module.css";
 
