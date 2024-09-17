@@ -10,8 +10,21 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   ...rest
 }) => {
-  const token: string | null = localStorage.getItem("jwt");
-  const isAuthenticated: boolean = !!token;
+  const isJsonFormat = (text: string) => {
+    try {
+      const tokens = JSON.parse(text);
+
+      return (
+        tokens.hasOwnProperty("access") && tokens.hasOwnProperty("refresh")
+      );
+    } catch (error) {
+      localStorage.removeItem("jwt");
+      return false;
+    }
+  };
+
+  const tokens: string | null = localStorage.getItem("jwt");
+  const isAuthenticated: boolean = !!tokens && isJsonFormat(tokens);
 
   return (
     <Route
