@@ -1,4 +1,4 @@
-button {
+.button {
   border: 0.2rem solid var(--ifm-color-primary);
   outline: none;
   border-radius: 0.3rem;
@@ -15,11 +15,11 @@ button {
   cursor: pointer;
 }
 
-button p {
+.button p {
   margin: 0;
 }
 
-button:hover {
+.button:hover {
   background-color: var(--ifm-color-primary);
   color: var(--ifm-color-emphasis-0);
 }

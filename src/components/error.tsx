@@ -26,6 +26,7 @@ const Error: React.FC<TypingEffectProps> = ({ text, speed, getData }) => {
   return (
     <>
       <p>{displayedText}</p>
+
       <button onClick={getData} className={styles.button}>
         <p>درخواست مجدد</p>
       </button>
