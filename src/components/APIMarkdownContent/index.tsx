@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import Loading from "./loading";
-import Error from "./error";
-import config from "./../../docusaurus.config";
+import Loading from "./../Loading";
+import Error from "./../Error";
+import config from "./../../../docusaurus.config";
 
-interface ApiMarkdownContentProps {
+interface APIMarkdownContentProps {
   id: number;
 }
 
-const ApiMarkdownContent: React.FC<ApiMarkdownContentProps> = ({ id }) => {
+const APIMarkdownContent: React.FC<APIMarkdownContentProps> = ({ id }) => {
   const history = useHistory();
   const url = "http://127.0.0.1:8000";
+  
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -77,4 +78,4 @@ const ApiMarkdownContent: React.FC<ApiMarkdownContentProps> = ({ id }) => {
   );
 };
 
-export default ApiMarkdownContent;
+export default APIMarkdownContent;

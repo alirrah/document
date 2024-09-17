@@ -6,6 +6,6 @@ slug: /my-custom-path
 sidebar_position: 1
 ---
 
-import ApiMarkdownContent from '@site/src/components/api-markdown-content';
+import APIMarkdownContent from '@site/src/components/APIMarkdownContent';
 
-<ApiMarkdownContent id={1} />
+<APIMarkdownContent id={1} />

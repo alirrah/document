@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
-import config from "./../../docusaurus.config";
+import config from "../../../docusaurus.config";
 
 interface ProtectedRouteProps extends RouteProps {
   children: React.ReactNode;
