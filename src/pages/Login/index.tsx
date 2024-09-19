@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import config from "../../../docusaurus.config";
 import styles from "./styles.module.css";
+import { login } from "../../services/authService";
+import { handleError } from "../../utils/errorUtils";
 
 const LoginPage: React.FC = () => {
   const url = "http://127.0.0.1:8000";
@@ -18,25 +19,16 @@ const LoginPage: React.FC = () => {
 
     setIsDisable(true);
     try {
-      const response = await axios.post(`${url}/jwt/login/`, {
-        username,
-        password,
-      });
+      // login is now an imported service
+      const response = await login(username, password);
 
       if (response.status === 200) {
         localStorage.setItem("jwt", JSON.stringify(response.data));
         history.push(`${config.baseUrl}docs/my-custom-path`);
       }
     } catch (error) {
-      setError(
-        error.code === "ERR_BAD_REQUEST"
-          ? "نام کاربری یا رمز عبور اشتباه می باشد."
-          : "خطایی در ارسال درخواست به موجود آماده است."
-      );
-
-      setTimeout(() => {
-        setError(null);
-      }, 3000);
+      // error message handled as imported util function
+      handleError(error, setError);
     } finally {
       setIsDisable(false);
     }
