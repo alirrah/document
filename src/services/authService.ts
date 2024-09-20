@@ -1,6 +1,7 @@
 import axios from "axios";
+import { getBaseUrl } from "../utils/apiUtil";
 
-const baseUrl = "http://127.0.0.1:8000";
+const baseUrl = getBaseUrl();
 
 export const login = async (username: string, password: string) => {
   try {

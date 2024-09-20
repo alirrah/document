@@ -4,9 +4,10 @@ import config from "../../../docusaurus.config";
 import styles from "./styles.module.css";
 import { login } from "../../services/authService";
 import { handleError } from "../../utils/errorUtils";
+import { getBaseUrl } from "../../utils/apiUtil";
 
 const LoginPage: React.FC = () => {
-  const url = "http://127.0.0.1:8000";
+  const url = getBaseUrl();
   const history = useHistory();
 
   const [username, setUsername] = useState<string>("");
@@ -19,7 +20,6 @@ const LoginPage: React.FC = () => {
 
     setIsDisable(true);
     try {
-      // login is now an imported service
       const response = await login(username, password);
 
       if (response.status === 200) {
@@ -27,7 +27,6 @@ const LoginPage: React.FC = () => {
         history.push(`${config.baseUrl}docs/my-custom-path`);
       }
     } catch (error) {
-      // error message handled as imported util function
       handleError(error, setError);
     } finally {
       setIsDisable(false);

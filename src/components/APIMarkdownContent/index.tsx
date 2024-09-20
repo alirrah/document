@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import Loading from "./../Loading";
 import Error from "./../Error";
 import config from "./../../../docusaurus.config";
+import { getBaseUrl } from "../../utils/apiUtil";
+import { getContent } from "../../services/contentServices";
 
 interface APIMarkdownContentProps {
   id: number;
@@ -12,8 +14,8 @@ interface APIMarkdownContentProps {
 
 const APIMarkdownContent: React.FC<APIMarkdownContentProps> = ({ id }) => {
   const history = useHistory();
-  const url = "http://127.0.0.1:8000";
-  
+  const url = getBaseUrl();
+
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,12 +29,7 @@ const APIMarkdownContent: React.FC<APIMarkdownContentProps> = ({ id }) => {
       localStorage.getItem("jwt")
     );
     try {
-      const response = await axios.get(`${url}/documents/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${token.access}`,
-        },
-      });
-      setContent(response.data.content);
+      getContent(url, id, token, setContent);
     } catch (err: any) {
       if (err.response) {
         if (err.response.status === 401) {
