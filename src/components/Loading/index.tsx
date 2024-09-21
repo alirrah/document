@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const Loading: React.FC = () => {
+const Loading = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.loader}>
