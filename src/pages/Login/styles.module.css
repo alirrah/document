@@ -72,6 +72,10 @@
   padding: 0.5rem 1rem;
 }
 
+.form div div {
+  position: relative;
+}
+
 .submit {
   inline-size: 100%;
 
@@ -91,4 +95,18 @@
   transition: 1s;
 
   cursor: pointer;
+}
+
+.eye {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: transparent;
+
+  border: 0;
+
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0.3rem;
 }
