@@ -10,12 +10,10 @@ import SearchBar from "@theme/SearchBar";
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
 import NavbarLogo from "@theme/Navbar/Logo";
 import NavbarSearch from "@theme/Navbar/Search";
-import Logout from "./../../../components/Logout";
-
+import Logout from "@site/src/components/Logout";
 import styles from "./styles.module.css";
 
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items as NavbarItemConfig[];
 }
 
@@ -28,9 +26,8 @@ function NavbarItems({ items }: { items: NavbarItemConfig[] }): JSX.Element {
           onError={(error) =>
             new Error(
               `A theme navbar item failed to render.
-Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
-${JSON.stringify(item, null, 2)}`,
-              { cause: error }
+            Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
+            ${JSON.stringify(item, null, 2)}\nOriginal error: ${error.message}`
             )
           }
         >
@@ -67,7 +64,6 @@ export default function NavbarContent(): JSX.Element {
   return (
     <NavbarContentLayout
       left={
-        // TODO stop hardcoding items?
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
@@ -75,8 +71,6 @@ export default function NavbarContent(): JSX.Element {
         </>
       }
       right={
-        // TODO stop hardcoding items?
-        // Ask the user to add the respective navbar items => more flexible
         <>
           <NavbarItems items={rightItems} />
           <Logout />

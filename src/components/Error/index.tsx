@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
-interface TypingEffectProps {
+const Error = ({
+  text,
+  speed,
+  getData,
+}: {
   text: string;
   speed: number;
   getData: () => void;
-}
-
-const Error: React.FC<TypingEffectProps> = ({ text, speed, getData }) => {
+}): JSX.Element => {
   const [displayedText, setDisplayedText] = useState<string>("");
 
   useEffect(() => {
-    let index = 0;
+    let index: number = 0;
     const interval = setInterval(() => {
       setDisplayedText((prev) => prev + text.charAt(index++));
 

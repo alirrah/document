@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import Loading from "./../Loading";
-import Error from "./../Error";
-import config from "./../../../docusaurus.config";
+import Loading from "@site/src/components/Loading";
+import Error from "@site/src/components/Error";
+import config from "@site/docusaurus.config";
+import { getContent } from "@site/src/services/ContentService";
+import { refreshTokens } from "@site/src/services/AuthService";
+import { getToken, removeToken, saveToken } from "@site/src/utils/JWTUtil";
+import { TokenInterface } from "@site/src/interfaces/TokenInterface";
 
-interface APIMarkdownContentProps {
-  id: number;
-}
-
-const APIMarkdownContent: React.FC<APIMarkdownContentProps> = ({ id }) => {
+const APIMarkdownContent = ({ id }: { id: number }): JSX.Element => {
   const history = useHistory();
-  const url = "http://127.0.0.1:8000";
-  
+
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,28 +21,20 @@ const APIMarkdownContent: React.FC<APIMarkdownContentProps> = ({ id }) => {
     setError(null);
     setContent("");
 
-    const token: { access: string; refresh: string } = JSON.parse(
-      localStorage.getItem("jwt")
-    );
+    const token: TokenInterface = JSON.parse(getToken());
     try {
-      const response = await axios.get(`${url}/documents/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${token.access}`,
-        },
-      });
+      const response = await getContent(id, token);
       setContent(response.data.content);
-    } catch (err: any) {
+    } catch (err) {
       if (err.response) {
         if (err.response.status === 401) {
           try {
-            const response = await axios.post(`${url}/jwt/token/refresh/`, {
-              refresh: token.refresh,
-            });
-            localStorage.setItem("jwt", JSON.stringify(response.data));
+            const response = await refreshTokens(token);
+            saveToken(JSON.stringify(response.data));
 
             return fetchData();
           } catch (error) {
-            localStorage.removeItem("jwt");
+            removeToken();
             history.replace(`${config.baseUrl}login`);
           }
         } else {

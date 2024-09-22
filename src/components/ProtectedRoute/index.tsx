@@ -1,30 +1,18 @@
 import React from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
-import config from "../../../docusaurus.config";
+import config from "@site/docusaurus.config";
+import { isTokenValid, getToken } from "@site/src/utils/JWTUtil";
 
 interface ProtectedRouteProps extends RouteProps {
   children: React.ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+const ProtectedRoute = ({
   children,
   ...rest
-}) => {
-  const isJsonFormat = (text: string) => {
-    try {
-      const tokens = JSON.parse(text);
-
-      return (
-        tokens.hasOwnProperty("access") && tokens.hasOwnProperty("refresh")
-      );
-    } catch (error) {
-      localStorage.removeItem("jwt");
-      return false;
-    }
-  };
-
-  const tokens: string | null = localStorage.getItem("jwt");
-  const isAuthenticated: boolean = !!tokens && isJsonFormat(tokens);
+}: ProtectedRouteProps): JSX.Element => {
+  const tokens: string | null = getToken();
+  const isAuthenticated: boolean = !!tokens && isTokenValid(tokens);
 
   return (
     <Route
