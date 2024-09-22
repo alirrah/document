@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import config from "@site/docusaurus.config";
 import { login } from "@site/src/services/AuthService";
-import { LoadingIcon } from "@site/src/utils/IconUtil";
+import { EyeIcon, EyeOffIcon, LoadingIcon } from "@site/src/utils/IconUtil";
 import { saveToken } from "@site/src/utils/JWTUtil";
 import styles from "./styles.module.css";
 
@@ -13,6 +13,7 @@ const LoginPage = (): JSX.Element => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [isDisable, setIsDisable] = useState<boolean>(false);
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -39,6 +40,11 @@ const LoginPage = (): JSX.Element => {
     }
   };
 
+  const handleShowHiddenPassword = (e: React.FormEvent): void => {
+    e.preventDefault;
+    setIsShowPassword((prev) => !prev);
+  };
+
   return (
     <div className={styles.container}>
       {error && <div className={styles.toast}>{error}</div>}
@@ -46,7 +52,7 @@ const LoginPage = (): JSX.Element => {
       <div className={styles.box}>
         <img src="img/logo.webp" alt="document logo" className={styles.logo} />
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.form}>
           <p className={styles.title}>ورود به حساب کاربری</p>
 
           <div>
@@ -64,20 +70,31 @@ const LoginPage = (): JSX.Element => {
           <div>
             <label htmlFor="password">رمز عبور</label>
 
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div>
+              <input
+                id="password"
+                type={isShowPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+
+              <button onClick={handleShowHiddenPassword} className={styles.eye}>
+                {isShowPassword ? <EyeIcon /> : <EyeOffIcon />}
+              </button>
+            </div>
           </div>
 
-          <button type="submit" className={styles.submit} disabled={isDisable}>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className={styles.submit}
+            disabled={isDisable}
+          >
             ورود
             {isDisable && <LoadingIcon />}
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
