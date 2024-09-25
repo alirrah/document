@@ -1,8 +1,8 @@
 ---
-id: my-document
-title: عنوان سند
-description: توضیحات سند
-slug: /my-custom-path
+id: web
+title: برنامه نویسی وب
+description: what is web programming
+slug: /web
 sidebar_position: 1
 ---
 

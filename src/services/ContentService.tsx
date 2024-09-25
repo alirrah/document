@@ -4,12 +4,9 @@ import { TokenInterface } from "../interfaces/TokenInterface";
 
 const baseUrl = getBaseUrl();
 
-export const getContent = async (
-  id: number,
-  token: TokenInterface
-) => {
+export const getContent = async (id: number, token: TokenInterface) => {
   try {
-    const response = await axios.get(`${baseUrl}/documents/${id}/`, {
+    const response = await axios.get(`${baseUrl}/document/${id}/`, {
       headers: {
         Authorization: `Bearer ${token.access}`,
       },

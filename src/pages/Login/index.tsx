@@ -23,7 +23,7 @@ const LoginPage = (): JSX.Element => {
       const response = await login(username, password);
       if (response.status === 200) {
         saveToken(JSON.stringify(response.data));
-        history.push(`${config.baseUrl}docs/my-custom-path`);
+        history.push(`${config.baseUrl}docs/web`);
       }
     } catch (error) {
       setError(
